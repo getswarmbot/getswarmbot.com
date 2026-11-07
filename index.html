@@ -142,12 +142,12 @@ footer > .wrap{position:relative;z-index:1}
 .fbar{display:flex;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;margin-top:56px;padding-top:20px;border-top:1px solid rgba(255,243,214,.18);font-size:.8rem;color:#e4c9a0}
 .giant{position:relative;display:block;width:100%;aspect-ratio:1440/300;margin-top:24px;margin-bottom:calc(-1px - env(safe-area-inset-bottom,0px));user-select:none;pointer-events:none}
 .giant canvas{position:absolute;inset:0;width:100%;height:100%}
-footer::before{content:"";position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cpath fill='%23ffcc00' fill-rule='evenodd' d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/svg%3E") 0 0/56px 98px;opacity:.06;pointer-events:none}
+footer::before{content:"";position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cpath fill='%23ffcc00' fill-rule='evenodd' d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/svg%3E") 0 var(--by,0px)/56px 98px;opacity:.06;pointer-events:none}
 
 
 /* frame: honeycomb texture, outlined scene numbers, glows */
 section > .wrap{position:relative;z-index:1}
-section::before{content:"";position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cpath fill='%23ffcc00' fill-rule='evenodd' d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/svg%3E") 0 0/56px 98px;opacity:.07;pointer-events:none;
+section::before{content:"";position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cpath fill='%23ffcc00' fill-rule='evenodd' d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/svg%3E") 0 var(--by,0px)/56px 98px;opacity:.07;pointer-events:none;
   -webkit-mask:radial-gradient(ellipse 55% 60% at var(--hx,75%) 50%,#000,transparent);mask:radial-gradient(ellipse 55% 60% at var(--hx,75%) 50%,#000,transparent)}
 section[data-n]::after{content:attr(data-n);position:absolute;top:clamp(20px,6vh,70px);left:var(--nx,auto);right:var(--nr,auto);font:800 clamp(9rem,24vw,22rem)/.8 var(--display);letter-spacing:-.06em;color:transparent;-webkit-text-stroke:2px rgba(255,204,0,.2);pointer-events:none;z-index:0}
 section.flipped{--hx:25%}
@@ -246,11 +246,11 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
 
 /* light hover: the honeycomb lights up around the pointer */
 .hx{position:absolute;inset:0;pointer-events:none;z-index:0;opacity:0;transition:opacity .4s;
-  background:radial-gradient(circle 240px at var(--mx,-999px) var(--my,-999px),rgba(255,204,0,.07),transparent 70%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cpath fill='%23ffcc00' fill-rule='evenodd' d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/svg%3E") 0 0/56px 98px;
+  background:radial-gradient(circle 240px at var(--mx,-999px) var(--my,-999px),rgba(255,204,0,.07),transparent 70%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cpath fill='%23ffcc00' fill-rule='evenodd' d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/svg%3E") 0 var(--by,0px)/56px 98px;
   -webkit-mask-image:radial-gradient(circle 240px at var(--mx,-999px) var(--my,-999px),#000 0,rgba(0,0,0,.35) 45%,transparent 100%);
   mask-image:radial-gradient(circle 240px at var(--mx,-999px) var(--my,-999px),#000 0,rgba(0,0,0,.35) 45%,transparent 100%)}
 .hx.on{opacity:.38}
-.run .hx{background:radial-gradient(circle 240px at var(--mx,-999px) var(--my,-999px),rgba(102,36,28,.08),transparent 70%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cpath fill='%2366241c' fill-rule='evenodd' d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/svg%3E") 0 0/56px 98px}
+.run .hx{background:radial-gradient(circle 240px at var(--mx,-999px) var(--my,-999px),rgba(102,36,28,.08),transparent 70%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cpath fill='%2366241c' fill-rule='evenodd' d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/svg%3E") 0 var(--by,0px)/56px 98px}
 .run .hx.on{opacity:.3}
 </style>
 </head>
@@ -689,6 +689,15 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
 </script>
 
 
+<script>
+/* Keep the honeycomb texture continuous across sections: shift each section's pattern by its page offset. */
+(()=>{
+  const hosts=[...document.querySelectorAll('section, footer')];
+  const align=()=>hosts.forEach(h=>{const top=h.getBoundingClientRect().top+scrollY;h.style.setProperty('--by',(-(top%98)).toFixed(2)+'px');});
+  align(); addEventListener('load',align); if(document.fonts) document.fonts.ready.then(align);
+  if('ResizeObserver' in window) new ResizeObserver(align).observe(document.body); else addEventListener('resize',align);
+})();
+</script>
 <script>
 /* Light hover on the background: a honeycomb layer in every section and the footer, masked to a circle around the pointer. */
 (()=>{
