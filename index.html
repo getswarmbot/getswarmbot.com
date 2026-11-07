@@ -189,6 +189,7 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
 #rig{position:absolute;left:0;top:0;transform:translate(-50%,-50%)}
 .bee{display:block;width:100%;height:100%;overflow:visible}
 .bee g{transform-box:fill-box}
+.bee.rr *{animation:none!important}
 #squash{transform-box:view-box;transform-origin:50% 60%}
 .L{opacity:0}
 .L-front{opacity:1}
@@ -603,7 +604,7 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
   // travel direction = segment direction times scroll direction
   let scrollDir = 1, lastY = scrollY;
   addEventListener('scroll', () => { if (scrollY !== lastY) scrollDir = scrollY > lastY ? 1 : -1; lastY = scrollY; }, {passive:true});
-  let cur = null, vx = 0, vy = 0, mx = innerWidth/2, my = innerHeight/2, t0 = performance.now(), flyAmt = 0, visited = null;
+  let rasterSz = 0, cur = null, vx = 0, vy = 0, mx = innerWidth/2, my = innerHeight/2, t0 = performance.now(), flyAmt = 0, visited = null;
   addEventListener('pointermove', e => { mx = e.clientX; my = e.clientY; }, {passive:true});
   const ringsEl = document.getElementById('rings');
   const rings = [...ringsEl.children];
@@ -641,6 +642,12 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
     // Draw the bee at full size and scale it down with a transform, so it stays sharp:
     // a layer drawn small and then scaled up turns blurry.
     const W0 = baseW(), sc = w / W0;
+    // Wings and antennae have endless CSS animations; the browser keeps their bitmap at the size
+    // they had when the animation started. Restart them once the bee settles at a new size.
+    if (Math.abs(t.size - cur.size) < 0.004 && Math.abs(rasterSz - cur.size) > 0.04) {
+      rasterSz = cur.size; bee.classList.add('rr');
+      requestAnimationFrame(() => requestAnimationFrame(() => bee.classList.remove('rr')));
+    }
     rig.style.width = W0 + 'px';
     rig.style.height = W0 * 2650/3000 + 'px';
     const bob = reduce ? 0 : Math.sin((now - t0)/600) * (pose === 'sleep' ? 2 : 7);
