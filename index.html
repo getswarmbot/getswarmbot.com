@@ -140,7 +140,8 @@ footer > .wrap{position:relative;z-index:1}
 .fcol a{text-decoration:none;color:var(--cream)}
 .fcol a:hover{color:var(--honey)}
 .fbar{display:flex;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;margin-top:56px;padding-top:20px;border-top:1px solid rgba(255,243,214,.18);font-size:.8rem;color:#e4c9a0}
-.giant{font:800 clamp(7rem,30vw,27rem)/.74 var(--display);letter-spacing:-.06em;text-align:center;color:transparent;background:linear-gradient(180deg,rgba(255,204,0,.55),rgba(255,204,0,0) 85%);-webkit-background-clip:text;background-clip:text;margin-top:24px;margin-bottom:calc(-.12em - env(safe-area-inset-bottom,0px));user-select:none;white-space:nowrap}
+.giant{position:relative;display:block;width:100%;aspect-ratio:1440/300;margin-top:24px;margin-bottom:calc(-1px - env(safe-area-inset-bottom,0px));user-select:none;pointer-events:none}
+.giant canvas{position:absolute;inset:0;width:100%;height:100%}
 footer::before{content:"";position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cpath fill='%23ffcc00' fill-rule='evenodd' d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/svg%3E") 0 0/56px 98px;opacity:.06;pointer-events:none}
 
 
@@ -182,7 +183,7 @@ section.flipped[data-n]{--nr:auto;--nx:2%}
 .run p{color:#5b2f17} .run .eyebrow{color:var(--brown)}
 .run .btn{background:var(--brown);border-color:var(--brown);color:var(--cream)}
 .run .perch.glow::after{background:radial-gradient(closest-side,rgba(102,36,28,.25),transparent)}
-footer{background:var(--brown)} footer{color:#f3d9b0}
+footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
 
 /* the actor: one SVG whose parts morph between front, flying and sleeping */
 #actor{position:fixed;left:0;top:0;width:1px;height:1px;pointer-events:none;z-index:5;will-change:transform}
@@ -431,7 +432,7 @@ footer{background:var(--brown)} footer{color:#f3d9b0}
     </div>
     <div class="fbar"><span>getswarmbot.com</span><span>Screens show a demo fleet with made-up customers. Synology and DSM are trademarks of Synology Inc.</span></div>
   </div>
-  <div class="giant" aria-hidden="true">swarm</div>
+  <div class="giant" aria-hidden="true"><canvas></canvas></div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
@@ -613,6 +614,67 @@ footer{background:var(--brown)} footer{color:#f3d9b0}
     const done = () => { btn.textContent = 'Copied'; setTimeout(() => btn.textContent = 'Copy', 1800); };
     const select = () => { const r = document.createRange(); r.selectNodeContents(pre); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = 'Selected, press Ctrl+C'; };
     try { navigator.clipboard.writeText(pre.textContent).then(done, select); } catch (e) { select(); }
+  });
+})();
+
+</script>
+<script>
+/* Footer: the giant "swarm" wordmark as a field of honeycomb dots. A slow honey wave runs
+   through the letters and the pointer lights them up; it only animates while the footer is on screen. */
+(()=>{
+  const box=document.querySelector('.giant'), cv=box&&box.querySelector('canvas'), foot=document.querySelector('footer');
+  if(!cv||!cv.getContext) return;
+  const ctx=cv.getContext('2d'), still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let W=0,H=0,dpr=1,pts=[],step=8,run=false,raf=0,px=-1e4,py=-1e4,gx=-1e4,gy=-1e4,glow=0;
+  const levels=10;
+  function layout(){
+    dpr=Math.min(2,devicePixelRatio||1); W=box.clientWidth; H=box.clientHeight; if(!W||!H) return;
+    cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr);
+    const m=document.createElement('canvas'); m.width=Math.round(W); m.height=Math.round(H);
+    const c=m.getContext('2d'); let fs=W*0.4;
+    c.font=`800 ${fs}px Raleway, Outfit, sans-serif`; if('letterSpacing' in c) c.letterSpacing=`${-0.06*fs}px`;
+    let mt=c.measureText('swarm'); fs*= (W*0.94)/(mt.actualBoundingBoxLeft+mt.actualBoundingBoxRight);
+    c.font=`800 ${fs}px Raleway, Outfit, sans-serif`; if('letterSpacing' in c) c.letterSpacing=`${-0.06*fs}px`;
+    mt=c.measureText('swarm');
+    const tw=mt.actualBoundingBoxLeft+mt.actualBoundingBoxRight, top=mt.actualBoundingBoxAscent;
+    c.fillStyle='#fff'; c.fillText('swarm',(W-tw)/2+mt.actualBoundingBoxLeft, H*0.1+top);
+    const data=c.getImageData(0,0,m.width,m.height).data;
+    step=Math.max(6,W/180); const dy=step*0.866; pts=[];
+    for(let r=0,y=step/2;y<H;r++,y+=dy) for(let x=(r%2?step:step/2);x<W;x+=step){
+      const i=(Math.round(y)*m.width+Math.round(x))*4, a=data[i+3]/255;
+      pts.push(x,y,a);
+    }
+  }
+  function frame(t){
+    t*=.001; ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,W,H);
+    gx+=(px-gx)*.12; gy+=(py-gy)*.12; glow+=((px>-1e3?1:0)-glow)*.06;
+    const R=W*.16, R2=R*R, rad=step*.48, buckets=Array.from({length:levels},()=>[]);
+    for(let i=0;i<pts.length;i+=3){
+      const x=pts[i],y=pts[i+1],m=pts[i+2];
+      const w=.5+.5*Math.sin(x*.0045-y*.004+t*1.1)*Math.sin(x*.0011+y*.009-t*.7);
+      const dx=x-gx,dy=y-gy,g=glow*Math.exp(-(dx*dx+dy*dy)/R2);
+      const fade=1-.6*(y/H);
+      let v=m*((.22+.6*w)*fade+.6*g);
+      if(v<.04) continue; v=Math.min(1,v);
+      buckets[Math.min(levels-1,(v*levels)|0)].push(x,y,rad*(.35+.65*v));
+    }
+    for(let b=0;b<levels;b++){
+      const L=buckets[b]; if(!L.length) continue; const v=(b+.5)/levels;
+      ctx.fillStyle=v>.85?`rgba(255,226,120,${v})`:`rgba(255,204,0,${.15+.85*v})`;
+      ctx.beginPath();
+      for(let j=0;j<L.length;j+=3){ctx.moveTo(L[j]+L[j+2],L[j+1]);ctx.arc(L[j],L[j+1],L[j+2],0,6.2832);}
+      ctx.fill();
+    }
+    if(run&&!still) raf=requestAnimationFrame(frame);
+  }
+  function start(){ if(run) return; run=true; raf=requestAnimationFrame(frame); }
+  function stop(){ run=false; cancelAnimationFrame(raf); }
+  foot.addEventListener('pointermove',e=>{const r=box.getBoundingClientRect(); px=e.clientX-r.left; py=e.clientY-r.top;});
+  foot.addEventListener('pointerleave',()=>{px=py=-1e4;});
+  const go=()=>{ layout(); if(still) frame(4000); };
+  (document.fonts?document.fonts.load('800 100px Raleway').catch(()=>{}):Promise.resolve()).then(()=>{
+    go(); let to; addEventListener('resize',()=>{clearTimeout(to);to=setTimeout(go,150);});
+    new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting?start():stop())).observe(box);
   });
 })();
 </script>
