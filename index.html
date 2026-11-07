@@ -40,7 +40,7 @@ h1{font-size:clamp(2.8rem,7.4vw,6.6rem)}
 h2{font-size:clamp(2.1rem,5vw,4.1rem)}
 h3{font-size:1.25rem;letter-spacing:-.01em;line-height:1.15}
 h1 em,h2 em{font-style:normal;color:var(--honey)}
-p{margin:0;max-width:36em;color:var(--muted)}
+p{margin:0;max-width:34em;color:var(--muted);font-size:clamp(1.02rem,1.2vw,1.14rem)}
 p strong{color:var(--cream);font-weight:500}
 a{color:var(--honey)}
 .eyebrow{font-family:var(--mono);font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
@@ -57,7 +57,7 @@ a{color:var(--honey)}
 .top nav a:hover{color:var(--cream)}
 
 /* scenes */
-section{position:relative;overflow-x:clip;padding-block:clamp(90px,15vh,170px)}
+section{position:relative;overflow-x:clip;padding-block:clamp(72px,11vh,128px)}
 .scene{display:grid;grid-template-columns:.9fr 1.25fr;gap:clamp(32px,5vw,72px);align-items:center}
 .scene.flip{grid-template-columns:1.25fr .9fr}
 .scene.flip > .copy{order:2}
@@ -65,9 +65,8 @@ section{position:relative;overflow-x:clip;padding-block:clamp(90px,15vh,170px)}
 
 /* hero */
 .hero{padding-top:clamp(120px,18vh,190px);padding-bottom:clamp(80px,12vh,140px);overflow:hidden}
-.hero .scene{grid-template-columns:1.3fr .7fr}
 #swarmfield{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.lead{font-size:clamp(1.05rem,1.6vw,1.3rem);color:var(--muted);max-width:30em}
+.lead{font-size:clamp(1.15rem,1.7vw,1.42rem);color:var(--muted);max-width:28em}
 .cta{display:flex;gap:12px;flex-wrap:wrap}
 .btn{font:600 1rem var(--body);padding:14px 24px;border-radius:999px;border:2px solid var(--honey);color:var(--dusk);background:var(--honey);text-decoration:none;cursor:pointer}
 .btn.ghost{background:transparent;color:var(--honey)}
@@ -99,7 +98,7 @@ section{position:relative;overflow-x:clip;padding-block:clamp(90px,15vh,170px)}
 .code span{display:inline-block;padding:.12em .28em;border-radius:10px;background:var(--dusk-3);border:1px solid var(--line)}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chips span{font-size:.82rem;padding:6px 12px;border-radius:999px;border:1px solid var(--line);color:var(--cream);background:var(--dusk-2)}
-.checks{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px 18px;font-size:.88rem;color:var(--muted);list-style:none;margin:0;padding:0}
+.checks{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px 18px;font-size:.98rem;color:var(--muted);list-style:none;margin:0;padding:0}
 .checks li{display:flex;gap:8px;align-items:center}
 .checks li::before{content:"";width:7px;height:7px;border-radius:2px;background:var(--honey);transform:rotate(45deg);flex:none}
 .rings{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
@@ -190,6 +189,7 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
 #rig{position:absolute;left:0;top:0;transform:translate(-50%,-50%)}
 .bee{display:block;width:100%;height:100%;overflow:visible}
 .bee g{transform-box:fill-box}
+.bee.rr *{animation:none!important}
 #squash{transform-box:view-box;transform-origin:50% 60%}
 .L{opacity:0}
 .L-front{opacity:1}
@@ -231,13 +231,13 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
 @media (max-width:860px){
   .scene,.scene.flip,.hero .scene{grid-template-columns:1fr}
   .scene.flip > .copy{order:0}
-  .hero .perch{width:58%;margin:-10px 0 0 auto}
   .more{grid-template-columns:1fr}
   .fgrid{grid-template-columns:1fr 1fr}
   .fbrand{grid-column:1/-1}
   .rings{grid-template-columns:repeat(2,1fr)}
   .top nav a.hide-s{display:none}
-  .p-tl,.p-bl,.p-tr,.p-br{left:auto!important;right:-2%!important}
+  .p-tl,.p-bl,.p-tr,.p-br{left:auto!important;right:2%!important;top:5%!important;bottom:auto!important;width:24%!important}
+
   .combwrap{padding-top:22%}
 }
 @media (prefers-reduced-motion:reduce){
@@ -252,6 +252,58 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
 .hx.on{opacity:.38}
 .run .hx{background:radial-gradient(circle 140px at var(--mx,-999px) var(--my,-999px),rgba(102,36,28,.08),transparent 70%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cpath fill='%2366241c' fill-rule='evenodd' d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/svg%3E") 0 var(--by,0px)/56px 98px}
 .run .hx.on{opacity:.3}
+
+/* zoomed crops: the part of each screen the copy talks about */
+.pic{position:relative}
+.mark{position:absolute;border:2px solid var(--honey);border-radius:8px;box-shadow:0 0 0 9999px rgba(15,9,7,.28);pointer-events:none}
+.zoom{position:absolute;width:56%;bottom:-16%;z-index:2;display:flex;flex-direction:column;gap:8px}
+.z-bl{left:-7%} .z-br{right:-7%;align-items:flex-end}
+.lens{width:100%;border-radius:12px;border:2px solid var(--honey);background-color:var(--dusk-2);background-repeat:no-repeat;box-shadow:0 30px 60px -18px rgba(0,0,0,.85),0 0 40px -8px rgba(255,204,0,.35)}
+.zoom span{font:600 .74rem var(--mono);letter-spacing:.06em;color:var(--dusk);background:var(--honey);padding:5px 10px;border-radius:999px}
+.shot{margin-bottom:9%!important}
+.shot figcaption{display:none}
+
+/* hero: the portal in full, the bee starts in the header */
+.hero h1{font-size:clamp(2.8rem,4.9vw,5rem)} .hero h1 em{white-space:nowrap}
+.hero .scene > .shot{width:calc(100% + max(0px, min(120px, (100vw - 1240px)/2 - 24px)))}
+.hero .shot .p-tr{right:1%;top:-15%}
+.hero .scene{grid-template-columns:.85fr 1.3fr}
+.hero .shot .frame{box-shadow:0 50px 110px -30px rgba(0,0,0,.9),0 0 0 1px rgba(255,204,0,.25)}
+.hp{position:relative;display:inline-block;width:64px;height:56px;vertical-align:middle;margin-left:6px}
+
+/* a light scene for rhythm */
+.light{background:var(--cream);color:#2a110c}
+.light::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cpath fill='%2366241c' fill-rule='evenodd' d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/svg%3E");opacity:.07}
+.light[data-n]::after{-webkit-text-stroke-color:rgba(102,36,28,.16)}
+.light h2{color:#2a110c} .light h2 em{color:#b5520f}
+.light p{color:#5b3a26} .light p strong{color:#2a110c} .light .eyebrow{color:#b5520f}
+.light .shot::before{background:radial-gradient(closest-side,rgba(245,149,32,.35),transparent 70%)}
+.light .hx{background:radial-gradient(circle 140px at var(--mx,-999px) var(--my,-999px),rgba(102,36,28,.08),transparent 70%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cpath fill='%2366241c' fill-rule='evenodd' d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/svg%3E") 0 var(--by,0px)/56px 98px}
+.light .hx.on{opacity:.3}
+
+/* also in the box: icon cards */
+.boxes{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.boxes article{position:relative;padding:26px 24px 24px;border-radius:18px;background:linear-gradient(180deg,var(--dusk-2),rgba(38,25,21,.5));border:1px solid var(--line);display:flex;flex-direction:column;gap:10px;transition:transform .3s,border-color .3s}
+.boxes article:hover{transform:translateY(-4px);border-color:rgba(255,204,0,.45)}
+.badge{width:58px;height:64px;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:var(--honey);display:grid;place-items:center;margin-bottom:6px}
+.badge svg{width:28px;height:28px;stroke:var(--brown);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.boxes h3{font-size:1.3rem;color:var(--cream)}
+.boxes p{font-size:1rem}
+
+/* run it: three steps */
+.go{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:clamp(36px,6vh,64px);list-style:none;padding:0;counter-reset:g}
+.go li{position:relative;padding:22px 22px 22px 84px;border-radius:16px;border:2px solid rgba(102,36,28,.22);background:rgba(255,243,214,.35);color:#5b2f17;min-height:96px}
+.go li::before{counter-increment:g;content:counter(g);position:absolute;left:20px;top:20px;width:46px;height:52px;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:var(--brown);color:var(--honey);display:grid;place-items:center;font:800 1.3rem var(--display)}
+.go b{display:block;color:#2a110c;font:800 1.15rem var(--display);margin-bottom:4px}
+.go code{font:600 .85em var(--mono)}
+
+@media (max-width:860px){
+  .zoom{position:relative;left:auto!important;right:auto!important;bottom:auto;width:88%;margin:-6% 0 0 auto}
+  .shot{margin-bottom:0!important}
+  .boxes,.go{grid-template-columns:1fr}
+  .hero .scene{grid-template-columns:1fr}
+  .hp{width:48px;height:44px}
+}
 </style>
 </head>
 <body>
@@ -261,7 +313,7 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
 
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#top">Swarm <span>for Synology</span></a>
+    <div><a class="brand" href="#top">Swarm <span>for Synology</span></a><span class="hp" data-perch data-intro data-pose="front" data-size=".15" aria-hidden="true"></span></div>
     <nav aria-label="Page">
       <a class="hide-s" href="#adopt">How it works</a>
       <a class="hide-s" href="#run">Run it</a>
@@ -280,7 +332,10 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
       <div class="cta"><a class="btn" href="#run">Run it yourself</a><a class="btn ghost" href="#adopt">See how it works</a></div>
       <div class="facts"><span><b>DSM 6.2</b> to <b>7.3</b></span><span>One Go binary or Docker image</span><span>Open source, <b>AGPL-3.0</b></span></div>
     </div>
-    <div class="perch glow" data-perch data-pose="front" data-size="1"></div>
+    <figure class="shot" style="margin:0">
+      <div class="frame"><div class="chrome"><i></i><i></i><i></i><span>swarm.example.com/</span></div><img src="screens/overview.webp" width="1600" height="1000" alt="Swarm overview: six NAS units skipping beats, eight need attention, a heartbeat chart and five NAS units to adopt"></div>
+      <div class="perch p-tr" data-perch data-pose="front" data-size=".46"></div>
+    </figure>
   </div>
 </section>
 
@@ -300,7 +355,8 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
       </ol>
     </div>
     <figure class="shot" style="margin:0">
-      <div class="frame"><div class="chrome"><i></i><i></i><i></i><span>swarm.example.com/adopt</span></div><img src="screens/adopt.webp" width="1600" height="1000" alt="The To adopt page with five NAS units waiting and the pairing form for a DS224+" loading="lazy"></div>
+      <div class="frame"><div class="chrome"><i></i><i></i><i></i><span>swarm.example.com/adopt</span></div><div class="pic"><img src="screens/adopt.webp" width="1600" height="1000" alt="The To adopt page with five NAS units waiting and the pairing form for a DS224+" loading="lazy"><i class="mark" style="left:45.00%;top:14.50%;width:40.62%;height:35.00%"></i></div></div>
+      <div class="zoom z-bl" aria-hidden="true"><div class="lens" style="aspect-ratio:650/350;background-image:url(screens/adopt.webp);background-size:246.15% auto;background-position:75.79% 22.31%"></div><span>Pairing code, then the customer</span></div>
       <div class="perch p-tr" data-perch data-pose="front" data-size=".5"></div>
       <figcaption>Portal › To adopt</figcaption>
     </figure>
@@ -315,7 +371,8 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
       <p>Which NAS stopped reporting, which volume fills up, which customer needs a call today. The heartbeat shows every report of the last day, a bar per half hour.</p>
     </div>
     <figure class="shot" style="margin:0">
-      <div class="frame"><div class="chrome"><i></i><i></i><i></i><span>swarm.example.com/</span></div><img src="screens/overview.webp" width="1600" height="1000" alt="Swarm overview: six NAS units skipping beats, eight need attention, a heartbeat chart and five NAS units to adopt" loading="lazy"></div>
+      <div class="frame"><div class="chrome"><i></i><i></i><i></i><span>swarm.example.com/</span></div><div class="pic"><img src="screens/overview.webp" width="1600" height="1000" alt="Swarm overview: six NAS units skipping beats, eight need attention, a heartbeat chart and five NAS units to adopt" loading="lazy"><i class="mark" style="left:20.00%;top:69.00%;width:56.25%;height:22.00%"></i></div></div>
+      <div class="zoom z-bl" aria-hidden="true"><div class="lens" style="aspect-ratio:900/220;background-image:url(screens/overview.webp);background-size:177.78% auto;background-position:45.71% 88.46%"></div><span>Every report of the last day</span></div>
       <div class="perch p-tr" data-perch data-pose="front" data-size=".55" style="width:24%;top:-16%;right:-4%"></div>
       <figcaption>Portal › Overview, with a demo fleet of 28 NAS units</figcaption>
     </figure>
@@ -335,14 +392,15 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
       <div class="chips"><span>Mail</span><span>Teams</span><span>Zammad</span><span>GLPI</span><span>Jira</span><span>Zendesk</span><span>Freshdesk</span><span>HaloPSA</span><span>Odoo</span><span>Webhook</span></div>
     </div>
     <figure class="shot" style="margin:0">
-      <div class="frame"><div class="chrome"><i></i><i></i><i></i><span>swarm.example.com/devices/broeck-nas1</span></div><img src="screens/device.webp" width="1600" height="1000" alt="A NAS page with a critical notice: drive 2 has a SMART warning and three pending sectors" loading="lazy"></div>
+      <div class="frame"><div class="chrome"><i></i><i></i><i></i><span>swarm.example.com/devices/broeck-nas1</span></div><div class="pic"><img src="screens/device.webp" width="1600" height="1000" alt="A NAS page with a critical notice: drive 2 has a SMART warning and three pending sectors" loading="lazy"><i class="mark" style="left:20.00%;top:20.00%;width:51.88%;height:40.00%"></i></div></div>
+      <div class="zoom z-br" aria-hidden="true"><div class="lens" style="aspect-ratio:830/400;background-image:url(screens/device.webp);background-size:192.77% auto;background-position:41.56% 33.33%"></div><span>Drive 2 needs replacing</span></div>
       <div class="perch p-bl" data-perch data-pose="front" data-mood="alarm" data-size=".5"></div>
       <figcaption>Portal › NAS › Overview</figcaption>
     </figure>
   </div>
 </section>
 
-<section data-n="04">
+<section class="light" data-n="04">
   <div class="wrap scene">
     <div class="copy stack">
       <span class="eyebrow">Backups</span>
@@ -351,7 +409,8 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
       <p><strong>Restore proof:</strong> Swarm drops a canary file in each task, reads it back from the backup and compares it. <strong>Cloud backup:</strong> one click gives a NAS its own Wasabi bucket and key.</p>
     </div>
     <figure class="shot" style="margin:0">
-      <div class="frame"><div class="chrome"><i></i><i></i><i></i><span>swarm.example.com/backups</span></div><img src="screens/backups.webp" width="1600" height="1000" alt="The Backups page with tasks per NAS, a failed local copy and its log" loading="lazy"></div>
+      <div class="frame"><div class="chrome"><i></i><i></i><i></i><span>swarm.example.com/backups</span></div><div class="pic"><img src="screens/backups.webp" width="1600" height="1000" alt="The Backups page with tasks per NAS, a failed local copy and its log" loading="lazy"><i class="mark" style="left:20.62%;top:43.00%;width:47.50%;height:20.00%"></i></div></div>
+      <div class="zoom z-bl" aria-hidden="true"><div class="lens" style="aspect-ratio:760/200;background-image:url(screens/backups.webp);background-size:210.53% auto;background-position:39.29% 53.75%"></div><span>The failed task and its log</span></div>
       <div class="perch p-tr" data-perch data-pose="front" data-size=".5"></div>
       <figcaption>Portal › Backups</figcaption>
     </figure>
@@ -373,7 +432,8 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
       </div>
     </div>
     <figure class="shot" style="margin:0">
-      <div class="frame"><div class="chrome"><i></i><i></i><i></i><span>swarm.example.com/updates</span></div><img src="screens/updates.webp" width="1600" height="1000" alt="The Updates page with DSM updates available per NAS, scheduled installs and maintenance windows" loading="lazy"></div>
+      <div class="frame"><div class="chrome"><i></i><i></i><i></i><span>swarm.example.com/updates</span></div><div class="pic"><img src="screens/updates.webp" width="1600" height="1000" alt="The Updates page with DSM updates available per NAS, scheduled installs and maintenance windows" loading="lazy"><i class="mark" style="left:20.62%;top:25.50%;width:51.88%;height:24.00%"></i></div></div>
+      <div class="zoom z-br" aria-hidden="true"><div class="lens" style="aspect-ratio:830/240;background-image:url(screens/updates.webp);background-size:192.77% auto;background-position:42.86% 33.55%"></div><span>Updates per NAS, with ring and window</span></div>
       <div class="perch p-tl" data-perch data-pose="front" data-size=".5"></div>
       <figcaption>Portal › Updates</figcaption>
     </figure>
@@ -399,11 +459,7 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
 <section style="padding-top:0">
   <div class="wrap stack" style="gap:28px">
     <span class="eyebrow">Also in the box</span>
-    <div class="more">
-      <figure><img src="screens/advisor.webp" width="1600" height="1000" alt="Security Advisor scores per customer" loading="lazy"><figcaption><b>Security Advisor</b>DSM's own scan for every NAS, scored per customer.</figcaption></figure>
-      <figure><img src="screens/policy.webp" width="1600" height="1000" alt="Policy page with deviations per rule" loading="lazy"><figcaption><b>Policy</b>One baseline for the fleet. Swarm reports what deviates.</figcaption></figure>
-      <figure><img src="screens/customers.webp" width="1600" height="1000" alt="Customers with their sites and open notices" loading="lazy"><figcaption><b>Customers and roles</b>Access per customer, sign-in with Entra ID or any OpenID provider.</figcaption></figure>
-    </div>
+    <div class="boxes"><article><div class="badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></div><h3>Security Advisor</h3><p>DSM&rsquo;s own security scan for every NAS, scored per customer.</p></article><article><div class="badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg></div><h3>Policy</h3><p>One baseline for the whole fleet. Swarm shows what deviates.</p></article><article><div class="badge"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c.6-3.4 3-5.4 6-5.4s5.4 2 6 5.4"/><path d="M16 4.8a3.2 3.2 0 010 6.2M18 14.8c1.7.8 2.7 2.6 3 5.2"/></svg></div><h3>Customers and roles</h3><p>Reader, technician or admin per customer. Sign in with Entra ID or any OpenID provider.</p></article><article><div class="badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h8l4 4v14H7z"/><path d="M15 3v4h4M10 12h6M10 16h6"/></svg></div><h3>Audit trail</h3><p>Every action, DSM sign-in and terminal session, with who did it and why.</p></article><article><div class="badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></svg></div><h3>Package updates</h3><p>Update DSM packages per NAS, right away or in the maintenance window.</p></article><article><div class="badge"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="7" rx="2"/><rect x="4" y="13" width="16" height="7" rx="2"/><path d="M8 7.5h.01M8 16.5h.01"/></svg></div><h3>DSM 6.2 to 7.3</h3><p>One package per DSM generation, for ARM and x86 models alike.</p></article></div>
   </div>
 </section>
 
@@ -424,6 +480,13 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
       <div class="cta"><a class="btn" href="https://github.com/getswarmbot/swarm">Source on GitHub</a></div>
     </div>
     <div class="perch glow" data-perch data-pose="front" data-size=".8"></div>
+  </div>
+  <div class="wrap">
+    <ol class="go">
+      <li><b>Start the server</b>Run the Docker image, open port 8080 and sign in.</li>
+      <li><b>Install the package</b>On each NAS, from Package Center or the <code>.spk</code> from Releases.</li>
+      <li><b>Adopt the NAS</b>Type the pairing code from DSM in the portal and pick the customer.</li>
+    </ol>
   </div>
 </section>
 
@@ -458,7 +521,8 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
   const speed = bee.querySelector('.speed');
   const layers = {front: bee.querySelector('.L-front'), fly: bee.querySelector('.L-fly'), sleep: bee.querySelector('.L-sleep')};
   const morphs = [...bee.querySelectorAll('path.m')];
-  const perches = [...document.querySelectorAll('[data-perch]')];
+  const perches = [...document.querySelectorAll('[data-perch]:not([data-intro])')];
+  const introPerch = document.querySelector('[data-intro]');
   const shots = [...document.querySelectorAll('.shot')];
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const baseW = () => Math.min(500, innerWidth * 0.4 + 40);
@@ -540,13 +604,26 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
   // travel direction = segment direction times scroll direction
   let scrollDir = 1, lastY = scrollY;
   addEventListener('scroll', () => { if (scrollY !== lastY) scrollDir = scrollY > lastY ? 1 : -1; lastY = scrollY; }, {passive:true});
-  let cur = null, vx = 0, vy = 0, mx = innerWidth/2, my = innerHeight/2, t0 = performance.now(), flyAmt = 0, visited = null;
+  let rasterSz = 0, cur = null, vx = 0, vy = 0, mx = innerWidth/2, my = innerHeight/2, t0 = performance.now(), flyAmt = 0, visited = null;
   addEventListener('pointermove', e => { mx = e.clientX; my = e.clientY; }, {passive:true});
   const ringsEl = document.getElementById('rings');
   const rings = [...ringsEl.children];
 
+  // On load the bee sits in the header; after a few seconds it flies to the screen in the hero.
+  let intro = introPerch && !reduce && scrollY < 5 ? {at: performance.now() + 2600, dur: 1400} : null;
+  function introTarget(now, t){
+    if (!intro) return t;
+    const h = perchPos(introPerch);
+    if (scrollY > 5 && now < intro.at) { intro = null; return t; }
+    if (now < intro.at) return {...h, home: h};
+    const u = (now - intro.at) / intro.dur;
+    if (u >= 1) { intro = null; return t; }
+    const f = ease(Math.min(1, u));
+    return {x: h.x + (t.x - h.x) * f, y: h.y + (t.y - h.y) * f - Math.sin(Math.PI*f) * innerHeight * 0.1,
+      size: h.size + (t.size - h.size) * f, pose: u > 0.92 ? t.pose : 'fly', mood: '', home: null, dir: Math.sign(t.x - h.x) || 1};
+  }
   function frame(now){
-    const t = target();
+    const t = introTarget(now, target());
     if (!cur) cur = {...t};
     const k = reduce ? 1 : 0.16;
     const nx = cur.x + (t.x - cur.x) * k, ny = cur.y + (t.y - cur.y) * k;
@@ -562,13 +639,22 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
     if (shot !== visited) { visited && visited.classList.remove('visited'); shot && shot.classList.add('visited'); visited = shot; }
 
     const w = baseW() * cur.size * (1 - 0.15*flyAmt);
-    rig.style.width = w + 'px';
-    rig.style.height = w * 2650/3000 + 'px';
+    // Draw the bee at full size and scale it down with a transform, so it stays sharp:
+    // a layer drawn small and then scaled up turns blurry.
+    const W0 = baseW(), sc = w / W0;
+    // Wings and antennae have endless CSS animations; the browser keeps their bitmap at the size
+    // they had when the animation started. Restart them once the bee settles at a new size.
+    if (Math.abs(t.size - cur.size) < 0.004 && Math.abs(rasterSz - cur.size) > 0.04) {
+      rasterSz = cur.size; bee.classList.add('rr');
+      requestAnimationFrame(() => requestAnimationFrame(() => bee.classList.remove('rr')));
+    }
+    rig.style.width = W0 + 'px';
+    rig.style.height = W0 * 2650/3000 + 'px';
     const bob = reduce ? 0 : Math.sin((now - t0)/600) * (pose === 'sleep' ? 2 : 7);
     const breathe = pose === 'sleep' && !reduce ? 1 + Math.sin((now - t0)/570)*0.02 : 1;
     const tilt = Math.max(-25, Math.min(25, vy * 1.2)) * flyAmt * face;
     actor.style.transform = `translate(${cur.x}px, ${cur.y + bob}px)`;
-    rig.style.transform = `translate(-50%,-50%) rotate(${tilt}deg) scale(${face}, ${breathe})`;
+    rig.style.transform = `translate(-50%,-50%) rotate(${tilt}deg) scale(${face*sc}, ${breathe*sc})`;
     speed.style.opacity = pose === 'fly' ? Math.min(1, sp/12) : 0;
     if (pose === 'front' && !(tl && tl.isActive())) {
       const dx = Math.max(-1, Math.min(1, (mx - cur.x) / 500)) * face;
