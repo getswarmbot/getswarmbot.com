@@ -65,7 +65,6 @@ section{position:relative;overflow-x:clip;padding-block:clamp(72px,11vh,128px)}
 
 /* hero */
 .hero{padding-top:clamp(120px,18vh,190px);padding-bottom:clamp(80px,12vh,140px);overflow:hidden}
-.hero .scene{grid-template-columns:1.3fr .7fr}
 #swarmfield{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .lead{font-size:clamp(1.15rem,1.7vw,1.42rem);color:var(--muted);max-width:28em}
 .cta{display:flex;gap:12px;flex-wrap:wrap}
@@ -231,7 +230,6 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
 @media (max-width:860px){
   .scene,.scene.flip,.hero .scene{grid-template-columns:1fr}
   .scene.flip > .copy{order:0}
-  .hero .perch{width:58%;margin:-10px 0 0 auto}
   .more{grid-template-columns:1fr}
   .fgrid{grid-template-columns:1fr 1fr}
   .fbrand{grid-column:1/-1}
@@ -264,11 +262,11 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
 .shot{margin-bottom:9%!important}
 .shot figcaption{display:none}
 
-/* hero: the portal behind the bee */
-.heroshot{position:absolute;right:-10vw;top:20%;width:min(900px,60vw);z-index:0;pointer-events:none;transform:perspective(1800px) rotateY(-16deg) rotateX(6deg) rotate(-2deg);transform-origin:100% 50%;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 22%);mask-image:linear-gradient(90deg,transparent,#000 22%)}
-.heroshot .frame{border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 60px 120px -30px rgba(0,0,0,.9);opacity:.92}
-.heroshot img{display:block;width:100%;height:auto}
+/* hero: the portal in full, the bee starts in the header */
+.hero h1{font-size:clamp(2.8rem,6.2vw,5.8rem)}
+.hero .scene{grid-template-columns:1fr 1.15fr}
+.hero .shot .frame{box-shadow:0 50px 110px -30px rgba(0,0,0,.9),0 0 0 1px rgba(255,204,0,.25)}
+.hp{position:relative;display:inline-block;width:64px;height:56px;vertical-align:middle;margin-left:6px}
 
 /* a light scene for rhythm */
 .light{background:var(--cream);color:#2a110c}
@@ -300,7 +298,8 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
   .zoom{position:relative;left:auto!important;right:auto!important;bottom:auto;width:88%;margin:-6% 0 0 auto}
   .shot{margin-bottom:0!important}
   .boxes,.go{grid-template-columns:1fr}
-  .heroshot{right:-34vw;top:auto;bottom:4%;width:100vw}
+  .hero .scene{grid-template-columns:1fr}
+  .hp{width:48px;height:44px}
 }
 </style>
 </head>
@@ -311,7 +310,7 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
 
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#top">Swarm <span>for Synology</span></a>
+    <div><a class="brand" href="#top">Swarm <span>for Synology</span></a><span class="hp" data-perch data-intro data-pose="front" data-size=".15" aria-hidden="true"></span></div>
     <nav aria-label="Page">
       <a class="hide-s" href="#adopt">How it works</a>
       <a class="hide-s" href="#run">Run it</a>
@@ -322,7 +321,6 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
 
 <section class="hero" id="top">
   <canvas id="swarmfield" aria-hidden="true"></canvas>
-  <div class="heroshot" aria-hidden="true"><div class="frame"><img src="screens/overview.webp" width="1600" height="1000" alt=""></div></div>
   <div class="wrap scene">
     <div class="copy stack">
       <span class="eyebrow">Self-hosted monitoring for Synology NAS</span>
@@ -331,7 +329,10 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
       <div class="cta"><a class="btn" href="#run">Run it yourself</a><a class="btn ghost" href="#adopt">See how it works</a></div>
       <div class="facts"><span><b>DSM 6.2</b> to <b>7.3</b></span><span>One Go binary or Docker image</span><span>Open source, <b>AGPL-3.0</b></span></div>
     </div>
-    <div class="perch glow" data-perch data-pose="front" data-size="1"></div>
+    <figure class="shot" style="margin:0">
+      <div class="frame"><div class="chrome"><i></i><i></i><i></i><span>swarm.example.com/</span></div><img src="screens/overview.webp" width="1600" height="1000" alt="Swarm overview: six NAS units skipping beats, eight need attention, a heartbeat chart and five NAS units to adopt"></div>
+      <div class="perch p-tr" data-perch data-pose="front" data-size=".52"></div>
+    </figure>
   </div>
 </section>
 
@@ -517,7 +518,8 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
   const speed = bee.querySelector('.speed');
   const layers = {front: bee.querySelector('.L-front'), fly: bee.querySelector('.L-fly'), sleep: bee.querySelector('.L-sleep')};
   const morphs = [...bee.querySelectorAll('path.m')];
-  const perches = [...document.querySelectorAll('[data-perch]')];
+  const perches = [...document.querySelectorAll('[data-perch]:not([data-intro])')];
+  const introPerch = document.querySelector('[data-intro]');
   const shots = [...document.querySelectorAll('.shot')];
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const baseW = () => Math.min(500, innerWidth * 0.4 + 40);
@@ -604,8 +606,21 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
   const ringsEl = document.getElementById('rings');
   const rings = [...ringsEl.children];
 
+  // On load the bee sits in the header; after a few seconds it flies to the screen in the hero.
+  let intro = introPerch && !reduce && scrollY < 5 ? {at: performance.now() + 2600, dur: 1400} : null;
+  function introTarget(now, t){
+    if (!intro) return t;
+    const h = perchPos(introPerch);
+    if (scrollY > 5 && now < intro.at) { intro = null; return t; }
+    if (now < intro.at) return {...h, home: h};
+    const u = (now - intro.at) / intro.dur;
+    if (u >= 1) { intro = null; return t; }
+    const f = ease(Math.min(1, u));
+    return {x: h.x + (t.x - h.x) * f, y: h.y + (t.y - h.y) * f - Math.sin(Math.PI*f) * innerHeight * 0.1,
+      size: h.size + (t.size - h.size) * f, pose: u > 0.92 ? t.pose : 'fly', mood: '', home: null, dir: Math.sign(t.x - h.x) || 1};
+  }
   function frame(now){
-    const t = target();
+    const t = introTarget(now, target());
     if (!cur) cur = {...t};
     const k = reduce ? 1 : 0.16;
     const nx = cur.x + (t.x - cur.x) * k, ny = cur.y + (t.y - cur.y) * k;
