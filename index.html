@@ -263,8 +263,10 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
 .shot figcaption{display:none}
 
 /* hero: the portal in full, the bee starts in the header */
-.hero h1{font-size:clamp(2.8rem,6.2vw,5.8rem)}
-.hero .scene{grid-template-columns:1fr 1.15fr}
+.hero h1{font-size:clamp(2.8rem,4.9vw,5rem)} .hero h1 em{white-space:nowrap}
+.hero .scene > .shot{width:calc(100% + max(0px, min(120px, (100vw - 1240px)/2 - 24px)))}
+.hero .shot .p-tr{right:1%;top:-15%}
+.hero .scene{grid-template-columns:.85fr 1.3fr}
 .hero .shot .frame{box-shadow:0 50px 110px -30px rgba(0,0,0,.9),0 0 0 1px rgba(255,204,0,.25)}
 .hp{position:relative;display:inline-block;width:64px;height:56px;vertical-align:middle;margin-left:6px}
 
@@ -331,7 +333,7 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
     </div>
     <figure class="shot" style="margin:0">
       <div class="frame"><div class="chrome"><i></i><i></i><i></i><span>swarm.example.com/</span></div><img src="screens/overview.webp" width="1600" height="1000" alt="Swarm overview: six NAS units skipping beats, eight need attention, a heartbeat chart and five NAS units to adopt"></div>
-      <div class="perch p-tr" data-perch data-pose="front" data-size=".52"></div>
+      <div class="perch p-tr" data-perch data-pose="front" data-size=".46"></div>
     </figure>
   </div>
 </section>
@@ -636,13 +638,16 @@ footer{background:linear-gradient(180deg,#2a1712,#120a08)} footer{color:#f3d9b0}
     if (shot !== visited) { visited && visited.classList.remove('visited'); shot && shot.classList.add('visited'); visited = shot; }
 
     const w = baseW() * cur.size * (1 - 0.15*flyAmt);
-    rig.style.width = w + 'px';
-    rig.style.height = w * 2650/3000 + 'px';
+    // Draw the bee at full size and scale it down with a transform, so it stays sharp:
+    // a layer drawn small and then scaled up turns blurry.
+    const W0 = baseW(), sc = w / W0;
+    rig.style.width = W0 + 'px';
+    rig.style.height = W0 * 2650/3000 + 'px';
     const bob = reduce ? 0 : Math.sin((now - t0)/600) * (pose === 'sleep' ? 2 : 7);
     const breathe = pose === 'sleep' && !reduce ? 1 + Math.sin((now - t0)/570)*0.02 : 1;
     const tilt = Math.max(-25, Math.min(25, vy * 1.2)) * flyAmt * face;
     actor.style.transform = `translate(${cur.x}px, ${cur.y + bob}px)`;
-    rig.style.transform = `translate(-50%,-50%) rotate(${tilt}deg) scale(${face}, ${breathe})`;
+    rig.style.transform = `translate(-50%,-50%) rotate(${tilt}deg) scale(${face*sc}, ${breathe*sc})`;
     speed.style.opacity = pose === 'fly' ? Math.min(1, sp/12) : 0;
     if (pose === 'front' && !(tl && tl.isActive())) {
       const dx = Math.max(-1, Math.min(1, (mx - cur.x) / 500)) * face;
