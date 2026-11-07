@@ -454,13 +454,23 @@ footer{background:var(--brown)} footer{color:#f3d9b0}
   }
   function target(){
     const ps = perches.map(perchPos);
-    const mid = innerHeight * 0.55;
+    // Each perch gets a scroll key: the scroll position at which the bee sits on it.
+    // Keys are spread out so that on tall screens the bee still starts on the first
+    // perch at the top and reaches the last one at the bottom.
+    const mid = innerHeight * 0.55, gap = innerHeight * 0.45;
+    const anchor = scrollY + mid;
+    const maxAnchor = Math.max(mid, document.documentElement.scrollHeight - innerHeight) + mid;
+    const keys = ps.map(p => p.y + scrollY);
+    keys[0] = Math.max(keys[0], mid);
+    for (let k = 1; k < keys.length; k++) keys[k] = Math.max(keys[k], keys[k-1] + gap);
+    keys[keys.length-1] = Math.min(keys[keys.length-1], maxAnchor);
+    for (let k = keys.length - 2; k >= 0; k--) keys[k] = Math.min(keys[k], keys[k+1] - gap*0.5);
     let i = -1;
-    ps.forEach((p, k) => { if (p.y <= mid) i = k; });
+    keys.forEach((kk, k) => { if (kk <= anchor) i = k; });
     if (i < 0) return {...ps[0], home: ps[0]};
     if (i === ps.length-1) return {...ps[i], home: ps[i]};
     const a = ps[i], b = ps[i+1];
-    const u = (mid - a.y) / Math.max(1, b.y - a.y);
+    const u = (anchor - keys[i]) / Math.max(1, keys[i+1] - keys[i]);
     const lin = Math.max(0, Math.min(1, (u - 0.22) / 0.56));
     const f = ease(lin);
     const home = lin <= 0 ? a : lin >= 1 ? b : null;
